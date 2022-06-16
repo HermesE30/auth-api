@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./db/mongoose');
 
 const app = require('./app');
 
