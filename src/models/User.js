@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 const { default: isEmail } = require('validator/lib/isEmail');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const UserSchema = new mongoose.Schema({
   name: {
-    name: String,
+    type: String,
     trim: true,
     required: [true, 'Name is required'],
   },
   email: {
-    email: String,
+    type: String,
     unique: true,
     trim: true,
     required: [true, 'Email is required'],
@@ -47,7 +49,7 @@ const UserSchema = new mongoose.Schema({
   }],
 })
 
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', async function (next) {
   const user = this;
 
   if (user.isModified('password')) {
