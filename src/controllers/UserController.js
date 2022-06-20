@@ -20,7 +20,7 @@ const login = async (request, response) => {
     response.send({ user, token });
   } catch (error) {
     console.log(error);
-    response.status(403).send(error);
+    response.status(403).send({ error: error.message });
   }
 };
 
