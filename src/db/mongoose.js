@@ -6,4 +6,9 @@ console.log(`Connecting to MongoDB at ${MONGO_URI}`);
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
+  useUnifiedTopology: true
+}, function (error) {
+  if (error) {
+    console.log("Error!" + error);
+  }
 });
