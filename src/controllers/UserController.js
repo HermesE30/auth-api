@@ -52,7 +52,7 @@ const create = async (request, response) => {
     const userFound = await User.findOne({ email: body.email });
 
     if (userFound) {
-      response.status(400).send({ error: "User already exists" });
+      response.status(400).send({ error: "Email em uso" });
     }
     const user = new User(body);
     await user.save();
