@@ -49,6 +49,11 @@ const logoutAll = async (request, response) => {
 const create = async (request, response) => {
   try {
     const { body } = request;
+    const userFound = await User.findOne({ email: body.email });
+
+    if (userFound) {
+      response.status(400).send({ error: "User already exists" });
+    }
     const user = new User(body);
     await user.save();
     response.status(201).send(user);
